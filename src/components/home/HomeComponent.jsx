@@ -5,6 +5,7 @@ import Header from "../header/Header";
 import SearchBar from "../search-bar/SearchBar";
 import SearchedCities from "../searched-cities/SearchedCities";
 
+
 const HomeComponent = () => {
   const [city, setCity] = useState("");
   const [fetchedCityData, setFetchedCityData] = useState([]);
