@@ -1,7 +1,7 @@
 function SearchBar({ getWeatherData, setCity , city}) {
   return (
     <>
-      <div className="mt-5 bg-white/20 backdrop-blur-md p-6 rounded-lg shadow-lg flex items-center justify-center gap-4 w-[780px] ">
+      <div className=" bg-white/20 backdrop-blur-md p-6 rounded-lg shadow-lg flex items-center justify-center gap-4 w-[780px] ">
         <div className="p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-138 flex justify-between">
           <input
             type="text"
