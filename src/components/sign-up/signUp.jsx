@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../router/const";
+import { REGISTER_URL } from "../../api/api";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -9,7 +10,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function handleRegisterUser() {
     // Reset errors
@@ -30,11 +31,11 @@ function SignUp() {
     // If no errors, proceed with the request
     try {
       const res = await axios.post(
-        "https://67c2066e61d8935867e52eab.mockapi.io/weather-users",
+        REGISTER_URL,
         JSON.stringify({ name, email, password }),
         { headers: { "Content-Type": "application/json" } }
       );
-      navigate(ROUTES.login)
+      navigate(ROUTES.login);
       console.log("User registered successfully:", res.data);
     } catch (error) {
       console.error("Registration failed:", error);
