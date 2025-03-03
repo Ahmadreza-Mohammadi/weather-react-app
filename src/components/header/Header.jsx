@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router";
+import { ROUTES } from "../../router/const";
+
 function Header() {
+  const navigate = useNavigate();
   return (
     <>
-      
       <div className="bg-gray-800/80 backdrop-blur-md w-[780px] p-5 flex justify-between items-center h-20 rounded-lg shadow-lg">
         <div className="flex items-center gap-2">
           <h1 className="text-white font-bold text-3xl">Weather App</h1>
@@ -16,14 +19,13 @@ function Header() {
           <span className="hover:text-blue-300 cursor-pointer transition-colors">
             Home
           </span>
-          <span className="hover:text-blue-300 cursor-pointer transition-colors">
+          <span onClick={()=>navigate(ROUTES.profile)} className="hover:text-blue-300 cursor-pointer transition-colors">
             Profile
           </span>
           <span className="hover:text-blue-300 cursor-pointer transition-colors ">
             About
           </span>
         </div>
-        
       </div>
     </>
   );

@@ -6,6 +6,7 @@ export const ROUTES = {
   home: "/",
   signUp: "/sign-up",
   login: "/login",
+  profile: "/profile"
 };
 
 // export const routesArr = [
