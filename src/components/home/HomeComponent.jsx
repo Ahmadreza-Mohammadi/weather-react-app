@@ -1,15 +1,23 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { API_KEY, BASE_URL, LAT_LON_URL } from "../../api/api";
 import Header from "../header/Header";
 import SearchBar from "../search-bar/SearchBar";
 import SearchedCities from "../searched-cities/SearchedCities";
+import ErrorModal from "../../shared/modalError";
+import Footer from "../footer/footer";
 
 const HomeComponent = () => {
   const [city, setCity] = useState("");
   const [fetchedCityData, setFetchedCityData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+
+  useEffect(() => {
+    const storedCities =
+      JSON.parse(localStorage.getItem("searchedCities")) || [];
+    setFetchedCityData(storedCities.reverse());
+  }, []);
 
   const getWeatherData = async () => {
     if (!city.trim()) {
@@ -43,7 +51,12 @@ const HomeComponent = () => {
       );
 
       if (!isCityAlreadyAdded) {
-        setFetchedCityData([...fetchedCityData, weatherData.data]);
+        const updatedCityData = [...fetchedCityData, weatherData.data];
+        setFetchedCityData(updatedCityData.reverse());
+
+        const recentCities = updatedCityData.slice(-5);
+        localStorage.setItem("searchedCities", JSON.stringify(recentCities));
+
         setCity("");
       } else {
         setModalMessage(`${weatherData.data.name} is already exist!`);
@@ -64,21 +77,11 @@ const HomeComponent = () => {
         setCity={setCity}
         city={city}
       />
-
       <SearchedCities fetchedCityData={fetchedCityData} />
+      <Footer />
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center animate-fadeIn">
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg">
-            <p className="text-lg font-semibold mb-4">{modalMessage}</p>
-            <button
-              onClick={() => setShowModal(false)}
-              className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 rounded-lg hover:from-purple-600 hover:to-blue-600 transition-colors"
-            >
-              Close
-            </button>
-          </div>
-        </div>
+        <ErrorModal modalMessage={modalMessage} setShowModal={setShowModal} />
       )}
     </div>
   );

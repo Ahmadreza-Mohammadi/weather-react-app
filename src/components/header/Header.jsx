@@ -1,9 +1,8 @@
 function Header() {
   return (
     <>
-      {" "}
+      
       <div className="bg-gray-800/80 backdrop-blur-md w-[780px] p-5 flex justify-between items-center h-20 rounded-lg shadow-lg">
-        {/* Logo */}
         <div className="flex items-center gap-2">
           <h1 className="text-white font-bold text-3xl">Weather App</h1>
           <img
@@ -24,6 +23,7 @@ function Header() {
             About
           </span>
         </div>
+        
       </div>
     </>
   );
