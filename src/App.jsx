@@ -1,12 +1,7 @@
-import { BrowserRouter } from "react-router";
-import HomePage from "./pages/home/HomePage";
+import WeatherRouter from "./router/router";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <HomePage />
-    </BrowserRouter>
-  );
+  return <WeatherRouter />;
 }
 
 export default App;
