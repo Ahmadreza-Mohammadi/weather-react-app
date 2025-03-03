@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import { ROUTES } from "./const";
 import HomePage from "../pages/home/HomePage";
 import SignUpPage from "../pages/sign-up/signUpPage";
-import Login from "../components/login/LoginComponent";
+import Login from "../components/login/Login";
 
 function WeatherRouter() {
   return (

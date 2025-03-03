@@ -4,8 +4,8 @@
 
 export const ROUTES = {
   home: "/",
-  signUp: "sign-up",
-  login: "login",
+  signUp: "/sign-up",
+  login: "/login",
 };
 
 // export const routesArr = [
