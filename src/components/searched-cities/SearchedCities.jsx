@@ -1,4 +1,20 @@
+import { useState, useEffect } from "react";
+
 function SearchedCities({ fetchedCityData }) {
+  const [favoriteCities, setFavoriteCities] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favoriteCities));
+  }, [favoriteCities]);
+
+  function addToFavorites(city) {
+    if (!favoriteCities.some(favoriteCity => favoriteCity.name === city.name)) {
+      setFavoriteCities([...favoriteCities, city]);
+    }
+  }
+
   return (
     <>
       {fetchedCityData.length > 0 && (
@@ -10,9 +26,17 @@ function SearchedCities({ fetchedCityData }) {
                 className="flex gap-12 items-center bg-gradient-to-tr from-green-400 to-blue-600 w-8/9 h-100 backdrop-blur-lg rounded-lg shadow-lg p-4 hover:scale-105 transition-transform duration-300 flex-shrink-0"
               >
                 <div className="p-4 rounded-lg h-full flex flex-col justify-between text-2xl">
-                  <h2 className="text-4xl font-bold text-blue-900 mb-2">
-                    {city.name}
-                  </h2>
+                  <div className="flex items-center gap-y-1">
+                    <h2 className="text-4xl font-bold text-blue-900 mb-2">
+                      {city.name}
+                    </h2>
+                    <img
+                      className="h-6 cursor-pointer"
+                      src="https://www.svgrepo.com/show/526669/star.svg"
+                      alt=""
+                      onClick={() => addToFavorites(city)}
+                    />
+                  </div>
                   <div className="text-white/80 mb-1 flex gap-2 items-center">
                     <div className="flex items-center gap-1">
                       <img
@@ -33,7 +57,7 @@ function SearchedCities({ fetchedCityData }) {
                         alt=""
                       />
                       <span className="font-semibold">Weather:</span>
-                      <span>{city.weather[0].description}</span>
+                      <span  className="text">{city.weather[0].description}</span>
                     </div>
                   </div>
 
@@ -67,7 +91,9 @@ function SearchedCities({ fetchedCityData }) {
                         alt=""
                       />
                       <span className="font-semibold">Feels Like:</span>
-                      <span>{(city.main.feels_like - 273.15).toFixed(2)}°C</span>
+                      <span>
+                        {(city.main.feels_like - 273.15).toFixed(2)}°C
+                      </span>
                     </div>
                   </div>
                 </div>
