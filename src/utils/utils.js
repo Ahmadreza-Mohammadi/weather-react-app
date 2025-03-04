@@ -3,7 +3,8 @@ export const saveToLocalStorage = (key, value) => {
 };
 
 export const getFromLocalStorage = (key) => {
-  localStorage.getItem(key);
+  return JSON.parse(localStorage.getItem(key));
 };
+
 
 

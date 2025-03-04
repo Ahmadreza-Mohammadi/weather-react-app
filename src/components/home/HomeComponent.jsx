@@ -7,6 +7,7 @@ import Footer from "../footer/footer";
 import RecentBar from "../recent-bar/recentBar";
 import getWeatherData from "../../services/getWetherData"
 import FavoritesBar from "../favorites/favorites";
+import FavoritesList from "../favorites/favoritesList";
 
 const HomeComponent = () => {
   const [city, setCity] = useState("");
@@ -32,6 +33,7 @@ const HomeComponent = () => {
       <RecentBar />
       <SearchedCities fetchedCityData={fetchedCityData} />
       <FavoritesBar />
+      <FavoritesList />
       <Footer />
 
       {showModal && (
